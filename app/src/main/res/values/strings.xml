@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">EffectiveExpensesManager</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="overall_balance">Overall Balance</string>
+    <string-array name="arr">
+        <item>Income</item>
+        <item>Expense</item>
+    </string-array>
+
+</resources>
