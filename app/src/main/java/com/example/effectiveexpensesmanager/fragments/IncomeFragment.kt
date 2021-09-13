@@ -51,13 +51,6 @@ class IncomeFragment : Fragment(), onItemClickListener {
         }
         setRecyclerview()
 
-//        btnDelete.setOnClickListener {
-//
-//        }
-//
-//        btnEdit.setOnClickListener {
-//
-//        }
     }
 
     private fun setRecyclerview() {
@@ -67,27 +60,23 @@ class IncomeFragment : Fragment(), onItemClickListener {
     }
 
 
-    override fun onEditClicked_Expense(dataModel: DataModel) {
-        TODO("Not yet implemented")
-    }
-
-    override fun onDeleteClicked_Expense(dataModel: DataModel) {
-        TODO("Not yet implemented")
-    }
-
-    override fun onEditClicked_Income(dataModel: DataModel) {
-
-    }
-
-    override fun onDeleteClicked_Income(dataModel: DataModel) {
-        TODO("Not yet implemented")
-    }
 
     private fun updateUI(){
         val  latestData = dbHandler?.getIncomeData()
         mutableList.clear()
         latestData?.let { mutableList.addAll(it) }
         dataAdapter.notifyDataSetChanged()
+    }
+
+    override fun onEditClicked(dataModel: DataModel) {
+
+        dbHandler?.editIncome(dataModel)
+        updateUI()
+    }
+
+    override fun onDeleteClicked(dataModel: DataModel) {
+       dbHandler?.deleteIncome(dataModel)
+        updateUI()
     }
 
 

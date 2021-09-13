@@ -91,6 +91,7 @@ class DatabaseHandler(val context: Context) :
             Toast.makeText(context, "Failed to insert the data", Toast.LENGTH_SHORT).show()
         } else {
             Toast.makeText(context, "Data inserted Successfully!", Toast.LENGTH_SHORT).show()
+            totalExpense = totalExpense+amount
         }
     }
 
@@ -188,11 +189,10 @@ class DatabaseHandler(val context: Context) :
         val db = writableDatabase
         val resut = db.delete(TABLE_NAME1, "id=${dataModel.id}", null)
 
-        if (resut != -1) {
+        if (resut == -1) {
             Toast.makeText(context, "Data deletion failed", Toast.LENGTH_SHORT).show()
         } else {
-            Toast.makeText(context, "Data deleted", Toast.LENGTH_SHORT).show()
-            totalIncome = totalIncome-dataModel.amount
+            Toast.makeText(context, "Data is deleted", Toast.LENGTH_SHORT).show()
         }
 
     }
@@ -202,10 +202,10 @@ class DatabaseHandler(val context: Context) :
         val db = writableDatabase
         val resut = db.delete(TABLE_NAME2, "id=${dataModel.id}", null)
 
-        if (resut != -1) {
-            Toast.makeText(context, "Data is deleted", Toast.LENGTH_SHORT).show()
-        } else {
+        if (resut == -1) {
             Toast.makeText(context, "Data deletion failed", Toast.LENGTH_SHORT).show()
+        } else {
+            Toast.makeText(context, "Data is deleted", Toast.LENGTH_SHORT).show()
         }
     }
 

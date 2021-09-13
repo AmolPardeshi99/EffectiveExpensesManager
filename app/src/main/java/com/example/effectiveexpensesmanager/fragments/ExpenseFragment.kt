@@ -44,14 +44,6 @@ class ExpenseFragment : Fragment(), onItemClickListener{
         mutableList = dbHandler?.getExpenseData()!!
         setRecyclerview()
 
-//        btnDelete.setOnClickListener {
-//
-//        }
-//
-//        btnEdit.setOnClickListener {
-//
-//        }
-
     }
 
     private fun setRecyclerview() {
@@ -66,19 +58,15 @@ class ExpenseFragment : Fragment(), onItemClickListener{
         dataAdapter.notifyDataSetChanged()
     }
 
-    override fun onEditClicked_Expense(dataModel: DataModel) {
-    }
+    override fun onEditClicked(dataModel: DataModel) {
 
-    override fun onDeleteClicked_Expense(dataModel: DataModel) {
-        dbHandler?.deleteExpense(dataModel)
+        dbHandler?.editExpense(dataModel)
         updateUI()
     }
 
-    override fun onEditClicked_Income(dataModel: DataModel) {
-    }
-
-    override fun onDeleteClicked_Income(dataModel: DataModel) {
-
+    override fun onDeleteClicked(dataModel: DataModel) {
+       dbHandler?.deleteExpense(dataModel)
+        updateUI()
     }
 
 

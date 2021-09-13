@@ -11,11 +11,12 @@ import com.example.effectiveexpensesmanager.adapter.DataAdapter
 import com.example.effectiveexpensesmanager.adapter.DataModel
 import com.example.effectiveexpensesmanager.database.DatabaseHandler
 import kotlinx.android.synthetic.main.fragment_balance.*
+import kotlin.math.absoluteValue
 
 class BalanceFragment : Fragment() {
 
 
-    var dbHandler : DatabaseHandler? = null
+    lateinit var dbHandler : DatabaseHandler
     var mutableList = mutableListOf<DataModel>()
 
     override fun onAttach(context: Context) {
@@ -32,9 +33,14 @@ class BalanceFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        tvIncome.text
-        tvExpense.text
-        tvTotal.text
+        var expense :Int  = dbHandler.getTotalExpense()
+        var income: Int = dbHandler.getTotalIncome()
+        var totalBal = income-expense
+        tvIncome.text = "Total Income: Rs.${income}"
+        tvExpense.text = "Total Expense: Rs.${expense}"
+        tvTotal.text = "Total Balance: Rs.${totalBal}"
+
+
     }
 
 
