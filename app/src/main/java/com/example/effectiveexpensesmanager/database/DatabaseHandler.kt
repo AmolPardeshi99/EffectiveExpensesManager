@@ -156,8 +156,9 @@ class DatabaseHandler(val context: Context) :
     fun editIncome(dataModel: DataModel) {
         val db = writableDatabase
         val contentValues = ContentValues()
-        contentValues.put(DESC, dataModel.amount)
+        contentValues.put(AMT, dataModel.amount)
         contentValues.put(DESC, dataModel.desc)
+        contentValues.put(DATE, dataModel.date)
 
         val result = db.update(TABLE_NAME1, contentValues, "id=${dataModel.id}", null)
         // showing toast on basis of
@@ -172,10 +173,11 @@ class DatabaseHandler(val context: Context) :
     fun editExpense(dataModel: DataModel) {
         val db = writableDatabase
         val contentValues = ContentValues()
-        contentValues.put(DESC, dataModel.amount)
-        contentValues.put(DESC, dataModel.desc)
+        contentValues.put(AMT2, dataModel.amount)
+        contentValues.put(DESC2, dataModel.desc)
+        contentValues.put(DATE2, dataModel.date)
 
-        val result = db.update(TABLE_NAME1, contentValues, "id=${dataModel.id}", null)
+        val result = db.update(TABLE_NAME2, contentValues, "id=${dataModel.id}", null)
         // showing toast on basis of
         if (result != -1) {
             Toast.makeText(context, "Data is updated", Toast.LENGTH_SHORT).show()

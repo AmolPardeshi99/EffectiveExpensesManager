@@ -69,7 +69,14 @@ class IncomeFragment : Fragment(), onItemClickListener {
     }
 
     override fun onEditClicked(dataModel: DataModel) {
-
+        val newDate = "21/09/21"
+        val newDesc = "This is new Income"
+        val newAmount = 12500
+        var newcategory = "Income"
+        dataModel.amount = newAmount
+        dataModel.desc = newDesc
+        dataModel.date = newDate
+        dataModel.category = newcategory
         dbHandler?.editIncome(dataModel)
         updateUI()
     }

@@ -12,8 +12,11 @@ import com.example.effectiveexpensesmanager.adapter.DataAdapter
 import com.example.effectiveexpensesmanager.adapter.DataModel
 import com.example.effectiveexpensesmanager.database.DatabaseHandler
 import com.example.effectiveexpensesmanager.database.onItemClickListener
+import kotlinx.android.synthetic.main.activity_add_data.*
 import kotlinx.android.synthetic.main.fragment_expense.*
 import kotlinx.android.synthetic.main.item_layout.*
+import java.text.SimpleDateFormat
+import java.util.*
 
 class ExpenseFragment : Fragment(), onItemClickListener{
 
@@ -59,7 +62,14 @@ class ExpenseFragment : Fragment(), onItemClickListener{
     }
 
     override fun onEditClicked(dataModel: DataModel) {
-
+        val newDate = "20/12/21"
+        val newDesc = "This is new Expense"
+        val newAmount = 125
+        var newcategory = "Expense"
+        dataModel.amount = newAmount
+        dataModel.desc = newDesc
+        dataModel.date = newDate
+        dataModel.category = newcategory
         dbHandler?.editExpense(dataModel)
         updateUI()
     }

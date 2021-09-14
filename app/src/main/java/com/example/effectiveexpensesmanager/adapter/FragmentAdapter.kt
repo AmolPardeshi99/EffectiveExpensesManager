@@ -22,6 +22,7 @@ class FragmentAdapter(fragmentManager: FragmentManager) :
     override fun getItem(position: Int): Fragment {
         return fragmentlist[position]
     }
+
     fun addFragment(fragment: Fragment,title:String){
         fragmentlist.add(fragment)
         fragmentTitle.add(title)
