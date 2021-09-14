@@ -79,7 +79,6 @@ class IncomeFragment : Fragment(), onItemClickListener {
         dataModel.category = newcategory
         dbHandler?.editIncome(dataModel)
         updateUI()
-
     }
 
     override fun onDeleteClicked(dataModel: DataModel) {
