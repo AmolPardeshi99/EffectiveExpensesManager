@@ -49,6 +49,14 @@
         android:hint="Enter Description"
         android:inputType="textMultiLine" />
 
+    <EditText
+        android:id="@+id/etInputDate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:hint="Enter Date as DD/MM/YYYY"
+        android:inputType="text" />
+
 
     <Button
         android:id="@+id/btnAddData"

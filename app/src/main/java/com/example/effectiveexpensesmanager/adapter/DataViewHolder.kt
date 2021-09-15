@@ -2,6 +2,7 @@ package com.example.effectiveexpensesmanager.adapter
 
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
+import com.example.effectiveexpensesmanager.database.DataModel
 import com.example.effectiveexpensesmanager.database.onItemClickListener
 import kotlinx.android.synthetic.main.item_layout.view.*
 

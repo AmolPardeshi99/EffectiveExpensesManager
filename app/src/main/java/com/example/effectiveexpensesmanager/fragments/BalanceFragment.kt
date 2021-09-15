@@ -7,42 +7,53 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.effectiveexpensesmanager.R
-import com.example.effectiveexpensesmanager.adapter.DataAdapter
-import com.example.effectiveexpensesmanager.adapter.DataModel
-import com.example.effectiveexpensesmanager.database.DatabaseHandler
+import com.example.effectiveexpensesmanager.database.DataDAO
+import com.example.effectiveexpensesmanager.database.DataRoomDataBase
 import kotlinx.android.synthetic.main.fragment_balance.*
-import kotlin.math.absoluteValue
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
-class BalanceFragment : Fragment() {
+class BalanceFragment : Fragment(R.layout.fragment_balance) {
 
 
-    lateinit var dbHandler : DatabaseHandler
-    var mutableList = mutableListOf<DataModel>()
+    lateinit var roomDb: DataRoomDataBase
+    lateinit var dataDAO: DataDAO
+    var total_expense: Int = 0
+    var total_Income: Int = 0
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        dbHandler = DatabaseHandler(context)
-    }
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_balance, container, false)
+        roomDb = DataRoomDataBase.getDataBaseObject(context)
+        dataDAO = roomDb.getDataDAO()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        var expense :Int  = dbHandler.getTotalExpense()
-        var income: Int = dbHandler.getTotalIncome()
-        var totalBal = income-expense
-        tvIncome.text = "Total Income: Rs.${income}"
-        tvExpense.text = "Total Expense: Rs.${expense}"
-        tvTotal.text = "Total Balance: Rs.${totalBal}"
+
+        dataDAO.getAllIncomeData().observe(viewLifecycleOwner, {
+            val datas = it
+            total_Income=0
+            datas.forEach {
+                if (it.category == "Income") total_Income += it.amount
+            }
+
+        })
+        //
+        dataDAO.getAllExpenseData().observe(viewLifecycleOwner, {
+            val datas = it
+            total_expense = 0
+            datas.forEach {
+                if (it.category == "Expense") total_expense += it.amount
+            }
+            tvExpense.text = "Total Expense: "+total_expense
+            tvIncome.text = "Total Income: "+total_Income
+            val balance = total_Income - total_expense
+            tvTotal.text = "Available Balance: "+balance
+        })
 
 
     }
-
 
 
 }

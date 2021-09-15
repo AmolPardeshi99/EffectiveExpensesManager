@@ -4,79 +4,64 @@ import android.app.Activity
 import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import com.example.effectiveexpensesmanager.R
 import com.example.effectiveexpensesmanager.adapter.DataAdapter
-import com.example.effectiveexpensesmanager.adapter.DataModel
-import com.example.effectiveexpensesmanager.database.DatabaseHandler
+import com.example.effectiveexpensesmanager.database.DataDAO
+import com.example.effectiveexpensesmanager.database.DataModel
+import com.example.effectiveexpensesmanager.database.DataRoomDataBase
 import com.example.effectiveexpensesmanager.database.onItemClickListener
-import kotlinx.android.synthetic.main.activity_add_data.*
 import kotlinx.android.synthetic.main.fragment_expense.*
-import kotlinx.android.synthetic.main.item_layout.*
-import java.text.SimpleDateFormat
-import java.util.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
-class ExpenseFragment : Fragment(), onItemClickListener{
+class ExpenseFragment : Fragment(R.layout.fragment_expense), onItemClickListener{
 
     private lateinit var dataAdapter: DataAdapter
-    private var mutableList = mutableListOf<DataModel>()
-    private var dbHandler : DatabaseHandler? = null
+    private var dataList = mutableListOf<DataModel>()
+
+    lateinit var roomDb : DataRoomDataBase
+    lateinit var dataDAO: DataDAO
 
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        dbHandler = DatabaseHandler(context)
-    }
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_expense, container, false)
-    }
-
-    override fun onResume() {
-        super.onResume()
-        updateUI()
+        roomDb = DataRoomDataBase.getDataBaseObject(context)
+        dataDAO = roomDb.getDataDAO()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        mutableList = dbHandler?.getExpenseData()!!
-        setRecyclerview()
 
-    }
-
-    private fun setRecyclerview() {
-        dataAdapter = DataAdapter(context as Activity ,mutableList,this)
+        dataAdapter = DataAdapter(context as Activity ,dataList,this)
         recyclerview_expense.adapter = dataAdapter
-    }
 
-    private fun updateUI(){
-        val  latestData = dbHandler?.getExpenseData()
-        mutableList.clear()
-        latestData?.let { mutableList.addAll(it) }
-        dataAdapter.notifyDataSetChanged()
+        dataDAO.getAllExpenseData().observe(viewLifecycleOwner, androidx.lifecycle.Observer {
+            val datas = it
+            dataList.clear()
+            dataList.addAll(datas)
+            dataAdapter.notifyDataSetChanged()
+        })
+
+
     }
 
     override fun onEditClicked(dataModel: DataModel) {
-        val newDate = "20/12/21"
-        val newDesc = "This is new Expense"
-        val newAmount = 125
-        var newcategory = "Expense"
-        dataModel.amount = newAmount
-        dataModel.desc = newDesc
-        dataModel.date = newDate
-        dataModel.category = newcategory
-        dbHandler?.editExpense(dataModel)
-        updateUI()
+        dataModel.amount = 125
+        dataModel.desc = "This is new Expense"
+        dataModel.date = "20/12/21"
+        dataModel.category = "Expense"
+
+        CoroutineScope(Dispatchers.IO).launch {
+            dataDAO.updateData(dataModel)
+        }
     }
 
     override fun onDeleteClicked(dataModel: DataModel) {
-       dbHandler?.deleteExpense(dataModel)
-        updateUI()
+       CoroutineScope(Dispatchers.IO).launch {
+           dataDAO.deleteData(dataModel)
+       }
     }
 
 
