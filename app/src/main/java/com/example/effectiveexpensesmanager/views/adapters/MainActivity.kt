@@ -1,12 +1,13 @@
-package com.example.effectiveexpensesmanager
+package com.example.effectiveexpensesmanager.views.adapters
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.example.effectiveexpensesmanager.adapter.FragmentAdapter
-import com.example.effectiveexpensesmanager.fragments.BalanceFragment
-import com.example.effectiveexpensesmanager.fragments.ExpenseFragment
-import com.example.effectiveexpensesmanager.fragments.IncomeFragment
+import com.example.effectiveexpensesmanager.R
+import com.example.effectiveexpensesmanager.views.adapters.adapters.FragmentAdapter
+import com.example.effectiveexpensesmanager.views.adapters.fragments.BalanceFragment
+import com.example.effectiveexpensesmanager.views.adapters.fragments.ExpenseFragment
+import com.example.effectiveexpensesmanager.views.adapters.fragments.IncomeFragment
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -23,7 +24,7 @@ class MainActivity : AppCompatActivity() {
         tabLayout.setupWithViewPager(viewPager)
 
         ivAddbtn.setOnClickListener {
-            intent = Intent(this,AddDataActivity::class.java)
+            intent = Intent(this, AddDataActivity::class.java)
             startActivity(intent)
         }
     }

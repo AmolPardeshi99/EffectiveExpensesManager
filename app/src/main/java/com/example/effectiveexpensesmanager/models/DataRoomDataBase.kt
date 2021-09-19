@@ -1,4 +1,4 @@
-package com.example.effectiveexpensesmanager.database
+package com.example.effectiveexpensesmanager.models
 
 import android.content.Context
 import androidx.room.Database
@@ -14,8 +14,8 @@ abstract class DataRoomDataBase: RoomDatabase() {
 
         private var INSTANCE : DataRoomDataBase? = null
 
-        fun getDataBaseObject(context: Context) : DataRoomDataBase{
-            if (INSTANCE== null){
+        fun getDataBaseObject(context: Context) : DataRoomDataBase {
+            if (INSTANCE == null){
                 val builder = Room.databaseBuilder(
                     context.applicationContext,
                     DataRoomDataBase::class.java,

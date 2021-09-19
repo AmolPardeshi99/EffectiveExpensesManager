@@ -1,4 +1,4 @@
-package com.example.effectiveexpensesmanager.database
+package com.example.effectiveexpensesmanager.models
 
 import androidx.lifecycle.LiveData
 import androidx.room.*

@@ -1,9 +1,9 @@
-package com.example.effectiveexpensesmanager.adapter
+package com.example.effectiveexpensesmanager.views.adapters.adapters
 
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
-import com.example.effectiveexpensesmanager.database.DataModel
-import com.example.effectiveexpensesmanager.database.onItemClickListener
+import com.example.effectiveexpensesmanager.models.DataModel
+import com.example.effectiveexpensesmanager.views.adapters.onItemClickListener
 import kotlinx.android.synthetic.main.item_layout.view.*
 
 class DataViewHolder(itemView: View,var listener: onItemClickListener) : RecyclerView.ViewHolder(itemView) {

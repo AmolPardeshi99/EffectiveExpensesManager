@@ -1,18 +1,13 @@
-package com.example.effectiveexpensesmanager.fragments
+package com.example.effectiveexpensesmanager.views.adapters.fragments
 
 import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import com.example.effectiveexpensesmanager.R
-import com.example.effectiveexpensesmanager.database.DataDAO
-import com.example.effectiveexpensesmanager.database.DataRoomDataBase
+import com.example.effectiveexpensesmanager.models.DataDAO
+import com.example.effectiveexpensesmanager.models.DataRoomDataBase
 import kotlinx.android.synthetic.main.fragment_balance.*
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 
 class BalanceFragment : Fragment(R.layout.fragment_balance) {
 

@@ -8,7 +8,7 @@
     android:orientation="vertical"
     android:padding="10dp"
     android:layout_height="match_parent"
-    tools:context=".fragments.ExpenseFragment">
+    tools:context=".views.adapters.fragments.ExpenseFragment">
     <TextView
         android:id="@+id/tvOverall"
         android:layout_width="wrap_content"

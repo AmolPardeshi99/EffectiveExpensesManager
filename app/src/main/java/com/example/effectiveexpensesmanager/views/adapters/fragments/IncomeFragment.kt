@@ -1,4 +1,4 @@
-package com.example.effectiveexpensesmanager.fragments
+package com.example.effectiveexpensesmanager.views.adapters.fragments
 
 import android.annotation.SuppressLint
 import android.app.Activity
@@ -7,12 +7,16 @@ import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.View
+import androidx.lifecycle.ViewModelProviders
 import com.example.effectiveexpensesmanager.R
-import com.example.effectiveexpensesmanager.adapter.DataAdapter
-import com.example.effectiveexpensesmanager.database.DataDAO
-import com.example.effectiveexpensesmanager.database.DataModel
-import com.example.effectiveexpensesmanager.database.DataRoomDataBase
-import com.example.effectiveexpensesmanager.database.onItemClickListener
+import com.example.effectiveexpensesmanager.views.adapters.adapters.DataAdapter
+import com.example.effectiveexpensesmanager.models.DataDAO
+import com.example.effectiveexpensesmanager.models.DataModel
+import com.example.effectiveexpensesmanager.models.DataRoomDataBase
+import com.example.effectiveexpensesmanager.repository.DataRepo
+import com.example.effectiveexpensesmanager.viewmodels.DataViewModel
+import com.example.effectiveexpensesmanager.viewmodels.DataViewModelFactory
+import com.example.effectiveexpensesmanager.views.adapters.onItemClickListener
 import kotlinx.android.synthetic.main.fragment_income.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -25,23 +29,25 @@ class IncomeFragment : Fragment(R.layout.fragment_income), onItemClickListener {
 
     private lateinit var roomDb : DataRoomDataBase
     private lateinit var dataDAO: DataDAO
+    lateinit var viewModel: DataViewModel
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
         roomDb = DataRoomDataBase.getDataBaseObject(context)
         dataDAO = roomDb.getDataDAO()
+
+        val repo = DataRepo(dataDAO)
+        val viewModelFactory = DataViewModelFactory(repo)
+        viewModel = ViewModelProviders.of(this,viewModelFactory).get(DataViewModel::class.java)
     }
 
     @SuppressLint("NotifyDataSetChanged")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        dataDAO.getAllIncomeData().observe(viewLifecycleOwner, {
-            val datas = it
-            val total_expense=0
+        viewModel.getAllIncomeData().observe(viewLifecycleOwner, {
             dataList.clear()
-            dataList.addAll(datas)
-            Log.d("TAG", "onViewCreated: $total_expense")
+            dataList.addAll(it)
             dataAdapter.notifyDataSetChanged()
         })
 
@@ -60,15 +66,11 @@ class IncomeFragment : Fragment(R.layout.fragment_income), onItemClickListener {
         dataModel.date = newDate
         dataModel.category = newcategory
 
-        CoroutineScope(Dispatchers.IO).launch {
-            dataDAO.updateData(dataModel)
-        }
+        viewModel.updateData(dataModel)
     }
 
     override fun onDeleteClicked(dataModel: DataModel) {
-        CoroutineScope(Dispatchers.IO).launch {
-            dataDAO.deleteData(dataModel)
-        }
+        viewModel.deleteData(dataModel)
     }
 
 }

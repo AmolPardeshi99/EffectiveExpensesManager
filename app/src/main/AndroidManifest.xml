@@ -10,10 +10,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.EffectiveExpensesManager">
         <activity
-            android:name=".AddDataActivity"
+            android:name=".views.adapters.AddDataActivity"
             android:exported="true" />
         <activity
-            android:name=".MainActivity"
+            android:name=".views.adapters.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
