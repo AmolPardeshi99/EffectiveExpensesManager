@@ -30,6 +30,7 @@ class LoginActivity : AppCompatActivity() {
         dataDAO = roomDb.getDataDAO()
 
         val repo = DataRepo(dataDAO)
+
         val dataViewModelFactory = DataViewModelFactory(repo)
         dataViewModel = ViewModelProviders.of(this,dataViewModelFactory).get(DataViewModel::class.java)
 
