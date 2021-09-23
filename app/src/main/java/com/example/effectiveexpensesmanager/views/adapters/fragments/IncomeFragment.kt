@@ -4,23 +4,19 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.View
 import androidx.lifecycle.ViewModelProviders
 import com.example.effectiveexpensesmanager.R
 import com.example.effectiveexpensesmanager.views.adapters.adapters.DataAdapter
-import com.example.effectiveexpensesmanager.models.DataDAO
-import com.example.effectiveexpensesmanager.models.DataModel
-import com.example.effectiveexpensesmanager.models.DataRoomDataBase
+import com.example.effectiveexpensesmanager.models.roomdb.DataDAO
+import com.example.effectiveexpensesmanager.models.roomdb.DataModel
+import com.example.effectiveexpensesmanager.models.roomdb.DataRoomDataBase
 import com.example.effectiveexpensesmanager.repository.DataRepo
 import com.example.effectiveexpensesmanager.viewmodels.DataViewModel
 import com.example.effectiveexpensesmanager.viewmodels.DataViewModelFactory
 import com.example.effectiveexpensesmanager.views.adapters.onItemClickListener
 import kotlinx.android.synthetic.main.fragment_income.*
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 
 class IncomeFragment : Fragment(R.layout.fragment_income), onItemClickListener {
 

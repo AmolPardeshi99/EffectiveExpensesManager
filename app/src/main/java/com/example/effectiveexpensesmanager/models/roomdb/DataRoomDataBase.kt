@@ -1,4 +1,4 @@
-package com.example.effectiveexpensesmanager.models
+package com.example.effectiveexpensesmanager.models.roomdb
 
 import android.content.Context
 import androidx.room.Database

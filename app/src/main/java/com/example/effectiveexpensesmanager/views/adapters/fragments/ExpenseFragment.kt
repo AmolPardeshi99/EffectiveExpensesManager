@@ -8,17 +8,14 @@ import android.view.View
 import androidx.lifecycle.ViewModelProviders
 import com.example.effectiveexpensesmanager.R
 import com.example.effectiveexpensesmanager.views.adapters.adapters.DataAdapter
-import com.example.effectiveexpensesmanager.models.DataDAO
-import com.example.effectiveexpensesmanager.models.DataModel
-import com.example.effectiveexpensesmanager.models.DataRoomDataBase
+import com.example.effectiveexpensesmanager.models.roomdb.DataDAO
+import com.example.effectiveexpensesmanager.models.roomdb.DataModel
+import com.example.effectiveexpensesmanager.models.roomdb.DataRoomDataBase
 import com.example.effectiveexpensesmanager.repository.DataRepo
 import com.example.effectiveexpensesmanager.viewmodels.DataViewModel
 import com.example.effectiveexpensesmanager.viewmodels.DataViewModelFactory
 import com.example.effectiveexpensesmanager.views.adapters.onItemClickListener
 import kotlinx.android.synthetic.main.fragment_expense.*
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 
 class ExpenseFragment : Fragment(R.layout.fragment_expense), onItemClickListener {
 

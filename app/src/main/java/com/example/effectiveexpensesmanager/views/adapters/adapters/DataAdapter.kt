@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.effectiveexpensesmanager.R
-import com.example.effectiveexpensesmanager.models.DataModel
+import com.example.effectiveexpensesmanager.models.roomdb.DataModel
 import com.example.effectiveexpensesmanager.views.adapters.onItemClickListener
 
 class DataAdapter(val context: Context, val list : MutableList<DataModel>, var listener: onItemClickListener): RecyclerView.Adapter<DataViewHolder>() {

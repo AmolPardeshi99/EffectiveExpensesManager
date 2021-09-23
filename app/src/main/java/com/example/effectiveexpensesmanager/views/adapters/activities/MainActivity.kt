@@ -1,4 +1,4 @@
-package com.example.effectiveexpensesmanager.views.adapters
+package com.example.effectiveexpensesmanager.views.adapters.activities
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity

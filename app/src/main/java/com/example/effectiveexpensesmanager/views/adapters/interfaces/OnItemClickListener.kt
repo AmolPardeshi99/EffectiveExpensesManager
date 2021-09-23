@@ -1,6 +1,6 @@
 package com.example.effectiveexpensesmanager.views.adapters
 
-import com.example.effectiveexpensesmanager.models.DataModel
+import com.example.effectiveexpensesmanager.models.roomdb.DataModel
 
 interface onItemClickListener {
 

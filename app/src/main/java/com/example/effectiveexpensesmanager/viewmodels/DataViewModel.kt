@@ -2,11 +2,27 @@ package com.example.effectiveexpensesmanager.viewmodels
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
-import com.example.effectiveexpensesmanager.models.DataModel
+import androidx.lifecycle.liveData
+import com.example.effectiveexpensesmanager.models.roomdb.DataModel
+import com.example.effectiveexpensesmanager.models.remote.network.api.Resource
+import com.example.effectiveexpensesmanager.models.remote.requests.LoginRequestModel
+import com.example.effectiveexpensesmanager.models.remote.response.LoginResponse
 import com.example.effectiveexpensesmanager.repository.DataRepo
+import kotlinx.coroutines.Dispatchers
 
 class DataViewModel(val repo: DataRepo): ViewModel() {
 
+
+    fun userLogin(loginRequestModel: LoginRequestModel) : LiveData<Resource<LoginResponse>>{
+
+        // running coroutine as  well as creating live data
+        // ---> combo of coroutine and livedata
+        return liveData(Dispatchers.IO) {
+            val result = repo.login(loginRequestModel)
+            emit(result) // sending or emitting data to all observer
+            // mutablelivedata.value= result
+        }
+    }
     fun addData(dataModel: DataModel){
         repo.addDataToRoom(dataModel)
     }

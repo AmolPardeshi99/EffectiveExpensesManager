@@ -1,4 +1,4 @@
-package com.example.effectiveexpensesmanager.models
+package com.example.effectiveexpensesmanager.models.roomdb
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity

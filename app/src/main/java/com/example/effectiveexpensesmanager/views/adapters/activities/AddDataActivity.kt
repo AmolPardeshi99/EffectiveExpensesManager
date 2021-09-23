@@ -1,20 +1,17 @@
-package com.example.effectiveexpensesmanager.views.adapters
+package com.example.effectiveexpensesmanager.views.adapters.activities
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.lifecycle.ViewModelProviders
 import com.example.effectiveexpensesmanager.R
-import com.example.effectiveexpensesmanager.models.DataDAO
-import com.example.effectiveexpensesmanager.models.DataModel
-import com.example.effectiveexpensesmanager.models.DataRoomDataBase
+import com.example.effectiveexpensesmanager.models.roomdb.DataDAO
+import com.example.effectiveexpensesmanager.models.roomdb.DataModel
+import com.example.effectiveexpensesmanager.models.roomdb.DataRoomDataBase
 import com.example.effectiveexpensesmanager.repository.DataRepo
 import com.example.effectiveexpensesmanager.viewmodels.DataViewModel
 import com.example.effectiveexpensesmanager.viewmodels.DataViewModelFactory
 import kotlinx.android.synthetic.main.activity_add_data.*
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 
 class AddDataActivity : AppCompatActivity() {
 

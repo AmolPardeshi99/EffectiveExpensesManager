@@ -5,8 +5,8 @@ import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.View
 import com.example.effectiveexpensesmanager.R
-import com.example.effectiveexpensesmanager.models.DataDAO
-import com.example.effectiveexpensesmanager.models.DataRoomDataBase
+import com.example.effectiveexpensesmanager.models.roomdb.DataDAO
+import com.example.effectiveexpensesmanager.models.roomdb.DataRoomDataBase
 import kotlinx.android.synthetic.main.fragment_balance.*
 
 class BalanceFragment : Fragment(R.layout.fragment_balance) {

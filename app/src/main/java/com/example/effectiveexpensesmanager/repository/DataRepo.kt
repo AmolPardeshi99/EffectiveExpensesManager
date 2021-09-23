@@ -1,13 +1,38 @@
 package com.example.effectiveexpensesmanager.repository
 
 import androidx.lifecycle.LiveData
-import com.example.effectiveexpensesmanager.models.DataDAO
-import com.example.effectiveexpensesmanager.models.DataModel
+import com.example.effectiveexpensesmanager.models.roomdb.DataDAO
+import com.example.effectiveexpensesmanager.models.roomdb.DataModel
+import com.example.effectiveexpensesmanager.models.remote.network.api.Network
+import com.example.effectiveexpensesmanager.models.remote.network.api.Resource
+import com.example.effectiveexpensesmanager.models.remote.network.api.ResponseHandler
+import com.example.effectiveexpensesmanager.models.remote.network.api.TasksAPI
+import com.example.effectiveexpensesmanager.models.remote.requests.LoginRequestModel
+import com.example.effectiveexpensesmanager.models.remote.response.LoginResponse
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import java.lang.Exception
 
 class DataRepo(private val dataDAO: DataDAO) {
+
+
+    private val api: TasksAPI = Network.getRetrofit().create(
+        TasksAPI::class.java)
+    private val responseHandler = ResponseHandler()
+    private val token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MGE0YmI3OTAzMjdlN2MwNmE2MTk1ODYiLCJpYXQiOjE2MzIxMzg2ODR9.cTxpYQrTfvramIOSPih6b1hJO_x1G-V2GmaRnTYSjU0"
+
+    suspend fun login(loginRequestModel: LoginRequestModel): Resource<LoginResponse> {
+
+        return try {
+            val response = api.login(loginRequestModel)
+            return responseHandler.handleSuccess(response)
+
+        }catch (e: Exception){
+            return responseHandler.handleException(e)
+        }
+
+    }
 
     fun addDataToRoom(dataModel: DataModel){
         CoroutineScope(Dispatchers.IO).launch {
