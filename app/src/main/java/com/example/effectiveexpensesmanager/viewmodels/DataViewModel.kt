@@ -6,7 +6,9 @@ import androidx.lifecycle.liveData
 import com.example.effectiveexpensesmanager.models.roomdb.DataModel
 import com.example.effectiveexpensesmanager.models.remote.network.api.Resource
 import com.example.effectiveexpensesmanager.models.remote.requests.LoginRequestModel
+import com.example.effectiveexpensesmanager.models.remote.requests.SignUpRequestModel
 import com.example.effectiveexpensesmanager.models.remote.response.LoginResponse
+import com.example.effectiveexpensesmanager.models.remote.response.SignUpResponseModel
 import com.example.effectiveexpensesmanager.repository.DataRepo
 import kotlinx.coroutines.Dispatchers
 
@@ -23,6 +25,16 @@ class DataViewModel(val repo: DataRepo): ViewModel() {
             // mutablelivedata.value= result
         }
     }
+
+
+    fun userSignUp(signUpRequestModel: SignUpRequestModel):LiveData<Resource<SignUpResponseModel>>{
+        return liveData(Dispatchers.IO){
+            val result = repo.Signup(signUpRequestModel)
+            emit(result)
+        }
+    }
+
+
     fun addData(dataModel: DataModel){
         repo.addDataToRoom(dataModel)
     }

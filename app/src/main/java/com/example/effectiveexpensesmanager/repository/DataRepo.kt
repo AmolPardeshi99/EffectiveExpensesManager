@@ -8,11 +8,13 @@ import com.example.effectiveexpensesmanager.models.remote.network.api.Resource
 import com.example.effectiveexpensesmanager.models.remote.network.api.ResponseHandler
 import com.example.effectiveexpensesmanager.models.remote.network.api.TasksAPI
 import com.example.effectiveexpensesmanager.models.remote.requests.LoginRequestModel
+import com.example.effectiveexpensesmanager.models.remote.requests.SignUpRequestModel
 import com.example.effectiveexpensesmanager.models.remote.response.LoginResponse
+import com.example.effectiveexpensesmanager.models.remote.response.SignUpResponseModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import java.lang.Exception
+import kotlin.Exception
 
 class DataRepo(private val dataDAO: DataDAO) {
 
@@ -31,7 +33,16 @@ class DataRepo(private val dataDAO: DataDAO) {
         }catch (e: Exception){
             return responseHandler.handleException(e)
         }
+    }
 
+    suspend fun Signup(signUpRequestModel: SignUpRequestModel):Resource<SignUpResponseModel>{
+
+        return try {
+            val response = api.signUp(token,signUpRequestModel)
+            return responseHandler.handleSuccess(response)
+        }catch (e: Exception){
+            return responseHandler.handleException(e)
+        }
     }
 
     fun addDataToRoom(dataModel: DataModel){

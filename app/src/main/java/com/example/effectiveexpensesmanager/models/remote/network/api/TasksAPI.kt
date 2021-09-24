@@ -2,7 +2,9 @@ package com.example.effectiveexpensesmanager.models.remote.network.api;
 
 
 import com.example.effectiveexpensesmanager.models.remote.requests.LoginRequestModel
+import com.example.effectiveexpensesmanager.models.remote.requests.SignUpRequestModel
 import com.example.effectiveexpensesmanager.models.remote.response.LoginResponse
+import com.example.effectiveexpensesmanager.models.remote.response.SignUpResponseModel
 import retrofit2.http.*
 
 
@@ -13,6 +15,14 @@ interface TasksAPI {
     suspend fun login(
         @Body loginRequest: LoginRequestModel
     ): LoginResponse
+
+    @POST("users/")
+    suspend fun signUp(
+        @Header("Authorization") authToken: String?,
+        @Body signUpRequestModel: SignUpRequestModel
+    ): SignUpResponseModel
+
+
 
 
 //    // for getting all tasks
