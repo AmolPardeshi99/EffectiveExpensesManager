@@ -32,7 +32,7 @@ class SignInFragment : Fragment(R.layout.fragment_sign_in) {
 
         val repo = DataRepo(dataDAO)
         val factory = DataViewModelFactory(repo)
-        dataViewModel = ViewModelProviders.of(this,factory).get(DataViewModel::class.java)
+        dataViewModel = ViewModelProviders.of(this, factory).get(DataViewModel::class.java)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -40,34 +40,44 @@ class SignInFragment : Fragment(R.layout.fragment_sign_in) {
 
         btnLogin.setOnClickListener {
 
+            var username: String = etUsername1.text.toString()
+            var password: String = etPassword1.text.toString()
+
             val loginRequestModel = LoginRequestModel(
-                userName = "pradeep1706108@gmail.com",
-                password = "dhankhar"
+                userName = username,
+                password = password
             )
 
-            dataViewModel.userLogin(loginRequestModel).observe(viewLifecycleOwner, Observer {
-                val response = it
+            if (username != null && password != null) {
+                dataViewModel.userLogin(loginRequestModel).observe(viewLifecycleOwner, Observer {
+                    val response = it
 
-                when(response.status){
+                    when (response.status) {
 
-                    Status.SUCCESS->{
-                        val name = response.data?.user?.name
+                        Status.SUCCESS -> {
+                            val name = response.data?.user?.name
 
-                        val intent = Intent(activity,MainActivity::class.java)
-                        startActivity(intent)
+                            val intent = Intent(activity, MainActivity::class.java)
+                            startActivity(intent)
+                        }
+                        Status.ERROR -> {
+                            val error = response.message
+                            Toast.makeText(activity, "Erroe is $error", Toast.LENGTH_SHORT).show()
+                        }
+                        Status.LOADING -> {
+
+                        }
                     }
-                    Status.ERROR ->{
-                        val error = response.message
-                        Toast.makeText(activity, "Erroe is $error", Toast.LENGTH_SHORT).show()
-                    }
-                    Status.LOADING ->{
-
-                    }
-                }
-            })
+                })
+            }
         }
     }
 
-
-
 }
+
+
+//            val loginRequestModel = LoginRequestModel(
+//                userName = "pradeep1706108@gmail.com",
+//                password = "dhankhar"
+//            )
+

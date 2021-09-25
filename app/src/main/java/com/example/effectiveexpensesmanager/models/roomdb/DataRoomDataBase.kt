@@ -21,7 +21,6 @@ abstract class DataRoomDataBase: RoomDatabase() {
                     DataRoomDataBase::class.java,
                     "data_db"
                 )
-
                 INSTANCE = builder.build()
                 return INSTANCE as DataRoomDataBase
             }

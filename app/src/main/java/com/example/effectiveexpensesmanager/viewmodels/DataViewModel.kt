@@ -16,7 +16,6 @@ class DataViewModel(val repo: DataRepo): ViewModel() {
 
 
     fun userLogin(loginRequestModel: LoginRequestModel) : LiveData<Resource<LoginResponse>>{
-
         // running coroutine as  well as creating live data
         // ---> combo of coroutine and livedata
         return liveData(Dispatchers.IO) {

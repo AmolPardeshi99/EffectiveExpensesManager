@@ -16,7 +16,6 @@ class DataAdapter(val context: Context, val list : MutableList<DataModel>, var l
 
     override fun onBindViewHolder(holder: DataViewHolder, position: Int) {
         holder.setData(list[position])
-
     }
 
     override fun getItemCount(): Int {

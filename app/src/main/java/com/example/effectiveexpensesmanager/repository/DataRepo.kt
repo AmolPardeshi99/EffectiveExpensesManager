@@ -19,8 +19,7 @@ import kotlin.Exception
 class DataRepo(private val dataDAO: DataDAO) {
 
 
-    private val api: TasksAPI = Network.getRetrofit().create(
-        TasksAPI::class.java)
+    private val api: TasksAPI = Network.getRetrofit().create(TasksAPI::class.java)
     private val responseHandler = ResponseHandler()
     private val token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MGE0YmI3OTAzMjdlN2MwNmE2MTk1ODYiLCJpYXQiOjE2MzIxMzg2ODR9.cTxpYQrTfvramIOSPih6b1hJO_x1G-V2GmaRnTYSjU0"
 
@@ -70,3 +69,6 @@ class DataRepo(private val dataDAO: DataDAO) {
         }
     }
 }
+
+
+//private val token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MTRiNjM4Y2YwNDg1NDBiNWMxNDkyMDAiLCJpYXQiOjE2MzI0ODIzMTl9.J7d5C6Dky6A6yjGDCEX5vFYycinza7XpzIledFhHMhk"
