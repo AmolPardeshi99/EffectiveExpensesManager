@@ -17,7 +17,6 @@ Effective Expense Manager is application that helps to keep an accurate record o
 * [Glide](https://github.com/bumptech/glide)
 * [Retrofit](https://square.github.io/retrofit/)
 * [Jetpack](https://developer.android.com/jetpack)
-* 
 
 # Things we used while making this application
 
